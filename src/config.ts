@@ -11,5 +11,8 @@ export default registerAs('config', () => {
             port: parseInt(process.env.MONGO_PORT, 10),
             connection: process.env.MONGO_CONNECTION,
         },
+        aws: {
+            bucket: process.env.AWS_BUCKET,
+        },
     }
 })

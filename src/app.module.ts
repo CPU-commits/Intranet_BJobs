@@ -5,6 +5,8 @@ import config from './config'
 import { DatabaseModule } from './database/database.module'
 import { JobsModule } from './modules/jobs/jobs.module'
 import { ClassroomModule } from './modules/classroom/classroom.module'
+import { FilesModule } from './modules/files/files.module'
+import { AwsModule } from './modules/aws/aws.module'
 
 @Module({
     imports: [
@@ -20,11 +22,16 @@ import { ClassroomModule } from './modules/classroom/classroom.module'
                 MONGO_PORT: Joi.number().required(),
                 MONGO_CONNECTION: Joi.string().required(),
                 NATS_HOST: Joi.string().required(),
+                AWS_BUCKET: Joi.string().required(),
+                AWS_ACCESS_KEY_ID: Joi.string().required(),
+                AWS_SECRET_ACCESS_KEY: Joi.string().required(),
             }),
         }),
         DatabaseModule,
         JobsModule,
         ClassroomModule,
+        FilesModule,
+        AwsModule,
     ],
 })
 export class AppModule {}
