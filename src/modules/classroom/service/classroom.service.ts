@@ -10,7 +10,6 @@ import { Work } from '../entities/work.entity'
 export class ClassroomService {
     private readonly jobs = {
         closeForm: 'close form',
-        reviseForm: 'revise form',
     }
 
     constructor(

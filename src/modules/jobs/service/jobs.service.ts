@@ -36,4 +36,8 @@ export class JobsService {
         const repeatJob = this.cron.create(name, data)
         await repeatJob.repeatEvery(repeatEvery).save()
     }
+
+    async now(name: string, data?: any) {
+        await this.cron.now(name, data)
+    }
 }
