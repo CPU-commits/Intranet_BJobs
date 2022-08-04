@@ -28,6 +28,7 @@
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.3",
     "agenda": "^4.3.0",
+    "aws-sdk": "^2.1183.0",
     "joi": "^17.6.0",
     "mongodb": "^4.8.0",
     "mongoose": "^6.4.4",
