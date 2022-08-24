@@ -7,6 +7,11 @@ import { JobsModule } from './modules/jobs/jobs.module'
 import { ClassroomModule } from './modules/classroom/classroom.module'
 import { FilesModule } from './modules/files/files.module'
 import { AwsModule } from './modules/aws/aws.module'
+import { LibraryModule } from './modules/library/library.module'
+import { NewsModule } from './modules/news/news.module'
+import { DatabaseModuleHealth } from './modules/database/database.module'
+import { NotificationsModule } from './modules/notifications/notifications.module'
+import { VotingModule } from './modules/voting/voting.module'
 
 @Module({
     imports: [
@@ -32,6 +37,11 @@ import { AwsModule } from './modules/aws/aws.module'
         ClassroomModule,
         FilesModule,
         AwsModule,
+        LibraryModule,
+        NewsModule,
+        DatabaseModuleHealth,
+        NotificationsModule,
+        VotingModule,
     ],
 })
 export class AppModule {}
