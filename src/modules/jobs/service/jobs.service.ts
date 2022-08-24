@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Db } from 'mongodb'
+import { Db, Document, Filter } from 'mongodb'
 import { Agenda, Processor } from 'agenda'
 import config from 'src/config'
 import { ConfigType } from '@nestjs/config'
@@ -29,7 +29,7 @@ export class JobsService {
     }
 
     async scheduleJob(when: string, name: string, data?: any) {
-        await this.cron.schedule(when, name, data)
+        return await this.cron.schedule(when, name, data)
     }
 
     async repeatEvery(name: string, repeatEvery: string, data?: any) {
@@ -39,5 +39,9 @@ export class JobsService {
 
     async now(name: string, data?: any) {
         await this.cron.now(name, data)
+    }
+
+    async cancel(query: Filter<Document>) {
+        return await this.cron.cancel(query)
     }
 }
