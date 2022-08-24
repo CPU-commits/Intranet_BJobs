@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose'
 import { ObjectId } from 'mongodb'
 import { Model } from 'mongoose'
 import { JobsService } from 'src/modules/jobs/service/jobs.service'
+import { CourseLetter } from '../entities/course_letter.entity'
+import { FileUploadClassroom } from '../entities/file_upload_classroom.entity'
 import { FormAccess } from '../entities/form_access.entity'
 import { Work } from '../entities/work.entity'
 
@@ -15,6 +17,10 @@ export class ClassroomService {
     constructor(
         private readonly jobService: JobsService,
         @InjectModel(Work.name) private readonly workModel: Model<Work>,
+        @InjectModel(CourseLetter.name)
+        private readonly courseLetterModel: Model<CourseLetter>,
+        @InjectModel(FileUploadClassroom.name)
+        private readonly fUCModel: Model<FileUploadClassroom>,
         @InjectModel(FormAccess.name)
         private readonly formAccessModel: Model<FormAccess>,
     ) {
@@ -42,5 +48,31 @@ export class ClassroomService {
             work,
             student,
         })
+    }
+
+    async isUsedCourseLetterByIdFile(idFile: string) {
+        const course = await this.courseLetterModel
+            .findOne(
+                {
+                    file: idFile,
+                },
+                { _id: 1 },
+            )
+            .exec()
+        return course != null
+    }
+
+    async isUsedFUCByIdFile(idFile: string) {
+        const fUC = await this.fUCModel
+            .findOne(
+                {
+                    files_uploaded: {
+                        $in: [new ObjectId(idFile)],
+                    },
+                },
+                { _id: 1 },
+            )
+            .exec()
+        return fUC != null
     }
 }
