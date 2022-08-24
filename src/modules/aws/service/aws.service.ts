@@ -49,4 +49,21 @@ export class AwsService {
             })
         return fileDeleted
     }
+
+    async listObjects(start?: string) {
+        const params = {
+            Bucket: this.configService.aws.bucket,
+            StartAfter: start,
+        }
+        const objects = await this.s3
+            .listObjectsV2(params)
+            .promise()
+            .then((data) => {
+                return data
+            })
+            .catch((error: Error) => {
+                throw new Error(error.Message)
+            })
+        return objects
+    }
 }
