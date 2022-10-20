@@ -15,6 +15,12 @@ export class CourseLetter {
     @Prop({ required: true, type: Types.ObjectId })
     course: Types.ObjectId
 
+    @Prop({ required: true })
+    next_section: string
+
+    @Prop({ default: false })
+    is_next_section_variable: boolean
+
     @Prop({ default: true })
     status: boolean
 }

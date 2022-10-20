@@ -15,4 +15,14 @@ export class ClassroomController {
             data.Student,
         )
     }
+
+    @EventPattern('close_semester')
+    closeSemester() {
+        this.classroomService.closeSemester()
+    }
+
+    @EventPattern('interrupt_finish_semester')
+    interruptFinishSemester() {
+        this.classroomService.interruptFinishSemester()
+    }
 }

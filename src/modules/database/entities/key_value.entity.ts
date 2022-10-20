@@ -5,8 +5,8 @@ export class KeyValue {
     @Prop({ required: true, unique: true, index: true })
     key: string
 
-    @Prop({ required: true })
-    value: string
+    @Prop({ required: true, type: {} })
+    value: unknown
 }
 
 export const KeyValueSchema = SchemaFactory.createForClass(KeyValue)
