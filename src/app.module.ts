@@ -12,6 +12,7 @@ import { NewsModule } from './modules/news/news.module'
 import { DatabaseModuleHealth } from './modules/database/database.module'
 import { NotificationsModule } from './modules/notifications/notifications.module'
 import { VotingModule } from './modules/voting/voting.module'
+import { MainController } from './main/main.controller'
 
 @Module({
     imports: [
@@ -44,5 +45,6 @@ import { VotingModule } from './modules/voting/voting.module'
         NotificationsModule,
         VotingModule,
     ],
+    controllers: [MainController],
 })
 export class AppModule {}
