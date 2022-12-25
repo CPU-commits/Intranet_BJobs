@@ -14,5 +14,6 @@ export default registerAs('config', () => {
         aws: {
             bucket: process.env.AWS_BUCKET,
         },
+        host: process.env.HOSTNAME,
     }
 })

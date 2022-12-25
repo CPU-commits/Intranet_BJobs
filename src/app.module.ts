@@ -30,6 +30,7 @@ import { VotingModule } from './modules/voting/voting.module'
                 AWS_BUCKET: Joi.string().required(),
                 AWS_ACCESS_KEY_ID: Joi.string().required(),
                 AWS_SECRET_ACCESS_KEY: Joi.string().required(),
+                HOSTNAME: Joi.string().required(),
             }),
         }),
         DatabaseModule,

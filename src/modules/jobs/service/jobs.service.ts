@@ -20,6 +20,7 @@ export class JobsService {
                 address: `${connection}://${user}:${password}@${host}:${port}`,
             },
             mongo: mongoClient,
+            name: `${configService.host}-node`,
         })
         this.cron.start()
     }

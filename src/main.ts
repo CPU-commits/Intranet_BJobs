@@ -7,15 +7,18 @@ async function bootstrap() {
     // Config
     const configService = config()
     // App
-    const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-        AppModule,
-        {
-            transport: Transport.NATS,
-            options: {
-                servers: [`nats://${configService.nats}:4222`],
-            },
+    const app = await NestFactory.create(AppModule)
+    // Nats Microservice
+    app.connectMicroservice<MicroserviceOptions>({
+        transport: Transport.NATS,
+        options: {
+            servers: [`nats://${configService.nats}:4222`],
+            queue: 'jobs',
         },
-    )
-    await app.listen()
+    })
+    await app.startAllMicroservices()
+
+    // Start server
+    await app.listen(3000)
 }
 bootstrap()
