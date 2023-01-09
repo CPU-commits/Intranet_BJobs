@@ -1,5 +1,7 @@
 import { registerAs } from '@nestjs/config'
 
+type NodeEnv = 'dev' | 'prod'
+
 export default registerAs('config', () => {
     return {
         nats: process.env.NATS_HOST,
@@ -15,5 +17,6 @@ export default registerAs('config', () => {
             bucket: process.env.AWS_BUCKET,
         },
         host: process.env.HOSTNAME,
+        nodeEnv: process.env.NODE_ENV as NodeEnv,
     }
 })

@@ -1,5 +1,7 @@
+import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston'
 import { AppModule } from './app.module'
 import config from './config'
 
@@ -8,6 +10,8 @@ async function bootstrap() {
     const configService = config()
     // App
     const app = await NestFactory.create(AppModule)
+    // Logger
+    app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER))
     // Nats Microservice
     app.connectMicroservice<MicroserviceOptions>({
         transport: Transport.NATS,
@@ -17,6 +21,8 @@ async function bootstrap() {
         },
     })
     await app.startAllMicroservices()
+    const logger = new Logger()
+    logger.log('Hola!')
 
     // Start server
     await app.listen(3000)

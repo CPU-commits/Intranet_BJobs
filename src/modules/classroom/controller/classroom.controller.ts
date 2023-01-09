@@ -1,8 +1,10 @@
-import { Controller } from '@nestjs/common'
+import { Controller, UseInterceptors } from '@nestjs/common'
 import { EventPattern, Payload } from '@nestjs/microservices'
+import { LoggerInterceptor } from 'src/logger.interceptor'
 import { CloseStudentForm } from '../models/close_form.model'
 import { ClassroomService } from '../service/classroom.service'
 
+@UseInterceptors(LoggerInterceptor)
 @Controller('classroom')
 export class ClassroomController {
     constructor(private readonly classroomService: ClassroomService) {}

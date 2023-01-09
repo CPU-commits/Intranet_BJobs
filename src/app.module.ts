@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigType } from '@nestjs/config'
 import * as Joi from 'joi'
 import config from './config'
 import { DatabaseModule } from './database/database.module'
@@ -13,6 +13,8 @@ import { DatabaseModuleHealth } from './modules/database/database.module'
 import { NotificationsModule } from './modules/notifications/notifications.module'
 import { VotingModule } from './modules/voting/voting.module'
 import { MainController } from './main/main.controller'
+import { WinstonModule } from 'nest-winston'
+import * as winston from 'winston'
 
 @Module({
     imports: [
@@ -44,6 +46,36 @@ import { MainController } from './main/main.controller'
         DatabaseModuleHealth,
         NotificationsModule,
         VotingModule,
+        WinstonModule.forRootAsync({
+            useFactory: (configService: ConfigType<typeof config>) => {
+                const transports: Array<winston.transport> = [
+                    new winston.transports.File({
+                        filename: 'error.log',
+                        level: 'error',
+                        dirname: `${process.cwd()}/logs`,
+                        maxsize: 10000000,
+                        maxFiles: 2,
+                    }),
+                    new winston.transports.File({
+                        filename: 'combined.log',
+                        dirname: `${process.cwd()}/logs`,
+                        maxsize: 10000000,
+                        maxFiles: 3,
+                        level: 'info',
+                    }),
+                ]
+                if (configService.nodeEnv !== 'prod')
+                    transports.push(
+                        new winston.transports.Console({
+                            format: winston.format.simple(),
+                        }),
+                    )
+                return {
+                    transports,
+                }
+            },
+            inject: [config.KEY],
+        }),
     ],
     controllers: [MainController],
 })
