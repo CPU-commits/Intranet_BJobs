@@ -1,4 +1,3 @@
-import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston'
@@ -21,9 +20,6 @@ async function bootstrap() {
         },
     })
     await app.startAllMicroservices()
-    const logger = new Logger()
-    logger.log('Hola!')
-
     // Start server
     await app.listen(3000)
 }

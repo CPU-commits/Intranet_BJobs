@@ -120,7 +120,7 @@ export class FilesService {
     }
 
     private deleteUnaccessFiles() {
-        this.jobsService.repeatEvery(this.jobs.deleteUnaccessFiles, 'one month')
+        this.jobsService.repeatEvery(this.jobs.deleteUnaccessFiles, 'one week')
     }
 
     private async getFiles(files: Array<string>) {

@@ -48,6 +48,7 @@ import * as winston from 'winston'
         VotingModule,
         WinstonModule.forRootAsync({
             useFactory: (configService: ConfigType<typeof config>) => {
+                const { timestamp, json, combine, simple } = winston.format
                 const transports: Array<winston.transport> = [
                     new winston.transports.File({
                         filename: 'error.log',
@@ -62,16 +63,18 @@ import * as winston from 'winston'
                         maxsize: 10000000,
                         maxFiles: 3,
                         level: 'info',
+                        format: combine(json(), timestamp()),
                     }),
                 ]
                 if (configService.nodeEnv !== 'prod')
                     transports.push(
                         new winston.transports.Console({
-                            format: winston.format.simple(),
+                            format: combine(simple(), timestamp()),
                         }),
                     )
                 return {
                     transports,
+                    format: combine(timestamp(), json()),
                 }
             },
             inject: [config.KEY],

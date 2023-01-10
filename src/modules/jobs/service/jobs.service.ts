@@ -43,7 +43,7 @@ export class JobsService {
             )
         })
         this.cron.on('fail', (job: Job<JobAttributesData>) => {
-            this.logger.log(
+            this.logger.error(
                 `Job ${job.attrs.name} failed ${job.attrs?._id ?? 'null'}`,
             )
         })

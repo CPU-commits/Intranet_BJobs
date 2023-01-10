@@ -69,6 +69,6 @@ export class NotificationsService {
     }
 
     doJob() {
-        this.jobsService.repeatEvery(this.jobs.deleteNotifications, '3 months')
+        this.jobsService.repeatEvery(this.jobs.deleteNotifications, 'one week')
     }
 }
