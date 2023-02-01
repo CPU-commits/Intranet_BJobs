@@ -106,7 +106,11 @@ export class VotingService {
                 }, 0)
                 // Emit
                 // Upload image
-                const pathImage = join(__dirname, '../images', 'voting.png')
+                const pathImage = join(
+                    __dirname,
+                    '../../../assets/images',
+                    'voting.png',
+                )
                 const image = readFileSync(pathImage, 'base64')
 
                 const buff = Buffer.from(image, 'base64')
