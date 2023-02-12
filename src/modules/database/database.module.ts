@@ -3,10 +3,10 @@ import { DatabaseController } from './controller/database.controller'
 import { JobsModule } from '../jobs/jobs.module'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import config from 'src/config'
-import { ConfigType } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { KeyValue, KeyValueSchema } from './entities/key_value.entity'
 import { User, UserSchema } from './entities/user.entity'
+import { getNatsServers } from 'src/utils/get_nats_servers'
 
 @Module({
     imports: [
@@ -15,11 +15,11 @@ import { User, UserSchema } from './entities/user.entity'
             {
                 name: 'NATS_CLIENT',
                 inject: [config.KEY],
-                useFactory: (configService: ConfigType<typeof config>) => {
+                useFactory: () => {
                     return {
                         transport: Transport.NATS,
                         options: {
-                            servers: [`nats://${configService.nats}:4222`],
+                            servers: getNatsServers(),
                         },
                     }
                 },

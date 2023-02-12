@@ -2,11 +2,9 @@ import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston'
 import { AppModule } from './app.module'
-import config from './config'
+import { getNatsServers } from './utils/get_nats_servers'
 
 async function bootstrap() {
-    // Config
-    const configService = config()
     // App
     const app = await NestFactory.create(AppModule)
     // Logger
@@ -15,7 +13,7 @@ async function bootstrap() {
     app.connectMicroservice<MicroserviceOptions>({
         transport: Transport.NATS,
         options: {
-            servers: [`nats://${configService.nats}:4222`],
+            servers: getNatsServers(),
             queue: 'jobs',
         },
     })
