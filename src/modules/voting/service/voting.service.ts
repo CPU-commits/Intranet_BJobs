@@ -325,20 +325,17 @@ export class VotingService {
             ],
         })
         // When´s
-        const whenProgress = moment(new Date()).diff(when.start_date, 'hours')
-        const whenClose = moment(new Date()).diff(when.finish_date, 'hours')
+        // When´s
+        const inHoursClose = moment().diff(when.finish_date, 'hours')
+        const whenOpenVoting = moment()
+            .add(when.period + inHoursClose, 'months')
+            .toDate()
+        const whenProgress = moment().add(when.start_date, 'hours').toDate()
+        const whenClose = moment().add(when.finish_date, 'hours').toDate()
+
         // Do jobs
-        this.jobsService.scheduleJob(
-            `in ${when.period + whenClose} months`,
-            this.jobs.OPEN_VOTING,
-        )
-        this.jobsService.scheduleJob(
-            `in ${whenClose} hours`,
-            this.jobs.CLOSE_VOTING,
-        )
-        this.jobsService.scheduleJob(
-            `in ${whenProgress} hours`,
-            this.jobs.PROGRESS_VOTING,
-        )
+        this.jobsService.scheduleJob(whenOpenVoting, this.jobs.OPEN_VOTING)
+        this.jobsService.scheduleJob(whenClose, this.jobs.CLOSE_VOTING)
+        this.jobsService.scheduleJob(whenProgress, this.jobs.PROGRESS_VOTING)
     }
 }

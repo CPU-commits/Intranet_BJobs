@@ -53,7 +53,7 @@ export class JobsService {
         this.cron.define(name, toDo)
     }
 
-    async scheduleJob(when: string, name: string, data?: any) {
+    async scheduleJob(when: Date, name: string, data?: any) {
         this.logger.log(
             `Schedule job with name ${name} - when: ${when}`,
             JobsService.name,

@@ -268,7 +268,7 @@ export class ClassroomService {
         })
     }
 
-    closeForm(when: string, work: string, student: string) {
+    closeForm(when: Date, work: string, student: string) {
         this.jobService.scheduleJob(when, this.jobs.closeForm, {
             work,
             student,

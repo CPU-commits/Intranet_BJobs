@@ -1,5 +1,6 @@
 import { Controller, UseInterceptors } from '@nestjs/common'
 import { EventPattern, Payload } from '@nestjs/microservices'
+import moment from 'moment'
 import { LoggerInterceptor } from 'src/logger.interceptor'
 import { CloseStudentForm } from '../models/close_form.model'
 import { ClassroomService } from '../service/classroom.service'
@@ -11,11 +12,8 @@ export class ClassroomController {
 
     @EventPattern('close_student_form')
     closeStudentForm(@Payload() data: CloseStudentForm) {
-        this.classroomService.closeForm(
-            `in ${data.Diff} hours`,
-            data.Work,
-            data.Student,
-        )
+        const when = moment().add(data.Diff, 'hours').toDate()
+        this.classroomService.closeForm(when, data.Work, data.Student)
     }
 
     @EventPattern('close_semester')
