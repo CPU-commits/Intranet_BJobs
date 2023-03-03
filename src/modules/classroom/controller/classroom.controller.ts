@@ -1,6 +1,6 @@
 import { Controller, UseInterceptors } from '@nestjs/common'
 import { EventPattern, Payload } from '@nestjs/microservices'
-import moment from 'moment'
+import * as moment from 'moment'
 import { LoggerInterceptor } from 'src/logger.interceptor'
 import { CloseStudentForm } from '../models/close_form.model'
 import { ClassroomService } from '../service/classroom.service'
