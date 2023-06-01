@@ -305,8 +305,8 @@ export class ClassroomService {
                 )
                 .exec()
         }
-        //this.jobService.scheduleJob('in 3 days', this.jobs.closeSemester)
-        this.jobService.now(this.jobs.closeSemester)
+        this.jobService.scheduleJob(closeDate, this.jobs.closeSemester)
+        // this.jobService.now(this.jobs.closeSemester)
     }
 
     async isUsedCourseLetterByIdFile(idFile: string) {
