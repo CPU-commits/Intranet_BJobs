@@ -33,7 +33,7 @@
     "joi": "^17.6.0",
     "moment": "^2.29.4",
     "mongodb": "^4.8.0",
-    "mongoose": "^6.4.4",
+    "mongoose": "^6.11.3",
     "nats": "^2.7.1",
     "nest-winston": "^1.8.0",
     "reflect-metadata": "^0.1.13",
