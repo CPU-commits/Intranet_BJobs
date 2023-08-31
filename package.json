@@ -32,7 +32,7 @@
     "aws-sdk": "^2.1372.0",
     "joi": "^17.6.0",
     "moment": "^2.29.4",
-    "mongodb": "^4.8.0",
+    "mongodb": "^4.17.0",
     "mongoose": "^6.4.4",
     "nats": "^2.7.1",
     "nest-winston": "^1.8.0",
